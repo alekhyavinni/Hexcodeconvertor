@@ -61,6 +61,11 @@ form {
     z-index: 2;
 }
 
+h2,p{
+        font-size: 22px;
+        font-family: 'Georgia',
+}
+
 .result {
   border: 1px solid #ccc;
   border-radius: 5px;

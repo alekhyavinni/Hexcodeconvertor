@@ -1,15 +1,17 @@
 // @alekhyaerikipati
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-    const [hexCode, setHexCode] = React.useState('');
-    const [colorName, setColorName] = React.useState('');
-    const [error, setError] = React.useState('');
-    const [fetchTrigger, setFetchTrigger] = React.useState(false); // Trigger state
+    const [hexCode, setHexCode] = useState('');
+    const [colorName, setColorName] = useState('');
+    const [mood, setMood] = useState('');
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
+    const [fetchTrigger, setFetchTrigger] = useState(false); // Trigger state
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (fetchTrigger) {
             const fetchData = async () => {
                 try {
@@ -26,7 +28,9 @@ function App() {
                     }
 
                     const data = await response.json();
-                    setColorName(data.colorName);
+                    setColorName(data.color);
+                    setMood(data.mood);
+                    setMessage(data.message);
                     setError('');
                 } catch (err) {
                     setError('Failed to fetch the color name and mood');
@@ -39,51 +43,52 @@ function App() {
         }
     }, [fetchTrigger, hexCode]);
 
+    // Set the trigger to true to start the fetch    
     const handleSubmit = (event) => {
         event.preventDefault();
-        setFetchTrigger(true); // Set the trigger to true to start the fetch
+        setFetchTrigger(true); 
     };
 
-    
     const handleInputChange = (e) => {
-      const value = e.target.value;
-      setHexCode(value);
+        const value = e.target.value;
+        setHexCode(value);
 
-      // Clear the result if the input is empty
-      if (!value) {
-          setColorName('');
-      }
-  };
+        // Clear the result if the input is empty
+        if (!value) {
+            setColorName('');
+            setMood('');
+            setMessage('');
+        }
+    };
 
-
-  const handleClear = () => {
-    setHexCode('');    // Clear the input field
-    setColorName('');  // Clear the output
-    setError('');      // Clear any errors
-};
-
+    //to clear all fields
+    const handleClear = () => {
+        setHexCode('');   
+        setColorName('');  
+        setMood('');       
+        setMessage('');    
+        setError('');      
+    };
 
     return (
         <div className="App">
             <header className="App-header">
-                <h1>Hex Code to Color Name Converter</h1>
+                <h1>Hex Code Converter</h1>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
                         value={hexCode}
-
-                        onChange={handleInputChange} // Updated to use handleInputChange
-
+                        onChange={handleInputChange}
                         placeholder="#FFFFFF"
                     />
-
                     <button type="submit" style={{ marginLeft: '10px' }}>Convert</button>
                     <button type="button" onClick={handleClear} style={{ marginLeft: '10px' }}>Clear</button>
                 </form>
                 {error && <p className="error">{error}</p>}
-                {colorName && (
-                    <div style={{ backgroundColor:"white", padding: '20px', color: '#FFF' }}>
-                        <h2 style={{ color: hexCode , fontSize:'22px' ,fontFamily: 'Georgia'}}>{colorName}</h2>
+                {colorName && mood && (
+                    <div style={{ backgroundColor: "white", padding: '20px', color: '#FFF' }}>
+                        <h2 style={{ color: hexCode, fontSize: '22px', fontFamily: 'Georgia' }}>{colorName.toUpperCase()} is associated with the mood {mood.toUpperCase()}</h2>
+                        <p style={{ color: hexCode, fontSize: '22px', fontFamily: 'Georgia' }}>API Backend Response : {message}</p>
                     </div>
                 )}
             </header>
