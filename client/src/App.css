@@ -41,7 +41,7 @@ body, html {
   text-align: center;
   padding: 20px;
   color: black; /* Adjust text color to be visible over the video */
-  background-color: rgba(176, 10, 10, 0.479); /* Semi-transparent background for readability */
+  background-color:black; /* Semi-transparent background for readability */
   max-width: 600px;
   margin: auto;
   top: 50%;
