@@ -1,5 +1,6 @@
 // @alekhyaerikipati
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
@@ -14,6 +15,9 @@ const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_KEY);
 
 // Print the API key to verify it's loaded correctly
 console.log("API Key being used:", process.env.REACT_APP_GEMINI_KEY);
+
+// Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 app.post('/api/color', async (req, res) => {
   const { hexCode } = req.body;
@@ -48,6 +52,12 @@ app.post('/api/color', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+  
+  // All other GET requests not handled before will return our React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  });
 
 // Function to extract color name and mood from the model's response
 function extractColorName(text) {
