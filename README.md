@@ -51,7 +51,7 @@ THEN the application displays the corresponding color name and the associated mo
 AND the output text color dynamically changes to match the hex code color provided.
 
 ```
-![alt text](./client/public/media/apppic.png)
+![alt text](./client/public/media/pic1.png)
 
 # Contributor
 
