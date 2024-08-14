@@ -1,0 +1,79 @@
+
+
+code {
+  font-family: Georgia, 'Times New Roman', Times, serif,
+    monospace;
+    font-size: 22px;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#bg-video  {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  background-size: cover;
+}
+
+/* video#backgroundVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+*/
+
+#root{
+  position: relative;
+  z-index: 1; /* Ensure the content is above the video */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  color: black; /* Adjust text color to be visible over the video */
+  background-color: rgba(176, 10, 10, 0.479); /* Semi-transparent background for readability */
+  max-width: 600px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.App {
+  text-align: center;
+  margin-top: 50px;
+  color: black;
+  color: white; /* Adjust color to be visible over the video background */
+}
+
+form {
+  margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.result {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: white; /* Semi-transparent background for readability */
+  position: relative;
+  z-index: 2;
+}
+
+.error {
+  color: rgb(200, 4, 4);
+  position: relative;
+  z-index: 2;
+  font-weight: bolder;
+}
